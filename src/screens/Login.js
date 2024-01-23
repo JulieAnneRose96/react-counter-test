@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import styles from "../styles/LoginStyles";
 import { Container, FloatingLabel, Row, Col } from "react-bootstrap";
 
 function Login() {
@@ -14,7 +15,6 @@ function Login() {
     password: "",
     confirmation: "",
   });
-  const [passwordStrength, setPasswordStrength] = useState(0);
 
   const confirmationError = useRef(null);
   const passwordError = useRef(null);
@@ -29,10 +29,6 @@ function Login() {
 
   const handlePasswordChange = (password) => {
     setFormData({ ...formData, password });
-
-    // Update the password strength
-    const strength = Math.min(password.length, 8) * 12.5; // Adjust based on your preference
-    setPasswordStrength(strength);
   };
 
   const handleEmailChange = (email) => {
@@ -75,14 +71,12 @@ function Login() {
   };
 
   return (
-    <div className="form-wrapper">
+    <div style={styles.formWrapper}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <h2 style={{ marginBottom: "15px", textAlign: "center" }}>
-          New user register
-        </h2>
+        <h2 style={styles.heading}>New user register</h2>
         <Container fluid>
           <Row>
-            <Col sm={6} style={{ marginBottom: "10px" }}>
+            <Col sm={6} style={styles.formGroupBottom}>
               <Form.Group>
                 <FloatingLabel controlId="firstnamLabel" label="First name">
                   <Form.Control
@@ -94,12 +88,12 @@ function Login() {
                     required
                   />
                 </FloatingLabel>
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" style={styles.errorText}>
                   Do not leave empty
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-            <Col sm={6} style={{ marginBottom: "10px" }}>
+            <Col sm={6} style={styles.formGroupBottom}>
               <FloatingLabel controlId="lastnameLabel" label="Last name">
                 <Form.Control
                   type="text"
@@ -114,7 +108,7 @@ function Login() {
           </Row>
 
           <Row>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group style={styles.formGroupBottom} controlId="formBasicEmail">
               <FloatingLabel controlId="emailLabel" label="Enter email">
                 <Form.Control
                   type="email"
@@ -129,14 +123,14 @@ function Login() {
                   pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
                 />
               </FloatingLabel>
-              <p style={{ color: "red", display: "none" }} ref={emailError}>
+              <p style={styles.errorText} ref={emailError}>
                 Please enter valid email
               </p>
             </Form.Group>
           </Row>
 
           <Row>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group style={styles.formGroupBottom} controlId="formBasicPassword">
               <FloatingLabel controlId="passwordLabel" label="Password">
                 <Form.Control
                   type="password"
@@ -151,19 +145,14 @@ function Login() {
                   pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
                 />
               </FloatingLabel>
-              <p style={{ color: "red", display: "none" }} ref={passwordError}>
+              <p style={styles.errorText} ref={passwordError}>
                 Must be 8 characters long
               </p>
-              {/* Password strength meter */}
-              <div
-                className="password-strength-meter"
-                style={{ width: `${passwordStrength}%` }}
-              ></div>
             </Form.Group>
           </Row>
 
           <Row>
-            <Form.Group className="mb-3" controlId="formBasicConfirmation">
+            <Form.Group style={styles.formGroupBottom} controlId="formBasicConfirmation">
               <FloatingLabel controlId="confirmationLabel" label="Confirmation">
                 <Form.Control
                   type="password"
@@ -175,7 +164,7 @@ function Login() {
                 />
               </FloatingLabel>
               <p
-                style={{ color: "red", display: "none" }}
+                style={styles.errorText}
                 ref={confirmationError}
               >
                 Password and confirmation are not the same
@@ -183,7 +172,7 @@ function Login() {
             </Form.Group>
           </Row>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" style={styles.customBtn}>
             Register
           </Button>
         </Container>

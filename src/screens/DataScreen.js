@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "./DataScreen.css";
 import NavBar from "./NavBar";
+import styles from "../styles/DataScreenStyles";
 
 function DataScreen() {
   const [todo, setTodo] = useState(null);
@@ -37,23 +37,21 @@ function DataScreen() {
     <div>
       <NavBar />
 
-      <div className="container mt-5 intro-container">
-        <h1 className="text-center mb-4">Todo Details</h1>
-        <div className="card mx-auto" style={{ width: "18rem" }}>
+      <div style={styles.container}>
+        <h1 style={styles.heading}>Todo Details</h1>
+        <div style={styles.card}>
           {todo ? (
-            <div className="card-body">
-              <h5 className="card-title">Title: {todo.title}</h5>
-              <p className="card-text">ID: {todo.id}</p>
-              <p className="card-text">User ID: {todo.userId}</p>
-              <p className="card-text">
-                Completed: {todo.completed ? "Yes" : "No"}
-              </p>
+            <div>
+              <h4 style={styles.textCenter}>Title: {todo.title}</h4>
+               <p>ID: {todo.id}</p> 
+              <p>User ID: {todo.userId}</p>
+              <p>Completed: {todo.completed ? "Yes" : "No"}</p>
             </div>
           ) : (
             <p>Loading...</p>
           )}
-          <div className="card-footer text-center">
-            <Button variant="primary" onClick={handleGoToCounter}>
+          <div style={styles.buttonContainer}>
+            <Button variant="primary" style={styles.customBtn} onClick={handleGoToCounter}>
               Go to Counter
             </Button>
           </div>

@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Login from "./Login";
-import DataScreen from "./DataScreen";
-import Counter from "./Counter";
+import Login from "./screens/Login";
+import DataScreen from "./screens/DataScreen";
+import Counter from "./screens/Counter";
 
 const App = () => {
   return (
